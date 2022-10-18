@@ -29,8 +29,9 @@ function buildHtml(pokemon) {
 
 exports.handler = async (event, context) => {
   try {
-    const { pokemonID } = event.body;
-    const requestURL = `${API_ENDPOINT}${pokemonID}`;
+    const body = event.body;
+    const params = new URLSearchParams(body);
+    const requestURL = `${API_ENDPOINT}${params.get(pokemonID)}`;
     console.log(
       '[DEBUG] making request to',
       JSON.stringify({
