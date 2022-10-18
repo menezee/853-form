@@ -3,12 +3,46 @@ import fetch from 'node-fetch'
 
 const API_ENDPOINT = 'https://pokeapi.co/api/v2/pokemon/1';
 
+function buildHtml(pokemon) {
+  return `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <title>${pokemon.name}</title>
+          </head>
+          <body>
+            <header>
+              <h1>${pokemon.name}</h1>
+            </header>
+            <main>
+              <img src="${pokemon.sprites.front_default}" />
+              <ul>
+                ${pokemon.abilities.map(data => (
+                  `<li>${data.ability.name}</li>`
+                ))}
+              </ul>
+            </main>
+          </body>
+        </html>
+      `;
+}
+
 exports.handler = async (event, context) => {
   try {
-    console.log('am i even here');
-    const response = await fetch(API_ENDPOINT);
+    const { pokemonID } = event.body;
+    const requestURL = `${API_ENDPOINT}${pokemonID}`;
+    console.log('[DEBUG] making request to', requestURL);
+    const response = await fetch(requestURL);
     const data = await response.json();
-    return { statusCode: 200, body: JSON.stringify({ data: data.name }) };
+    const html = buildHtml(data);
+    console.log('[DEBUG] generated html', html);
+    return {
+      statusCode: 200,
+      body: html,
+      headers: {
+        'Content-Type': 'text/html',
+      },
+    };
   } catch (error) {
     console.log(error);
     return {
