@@ -1,7 +1,7 @@
 // const fetch = require("node-fetch");
 import fetch from 'node-fetch'
 
-const API_ENDPOINT = 'https://pokeapi.co/api/v2/pokemon/1';
+const API_ENDPOINT = 'https://pokeapi.co/api/v2/pokemon/';
 
 function buildHtml(pokemon) {
   return `
