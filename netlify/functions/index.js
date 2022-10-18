@@ -31,7 +31,15 @@ exports.handler = async (event, context) => {
   try {
     const { pokemonID } = event.body;
     const requestURL = `${API_ENDPOINT}${pokemonID}`;
-    console.log('[DEBUG] making request to', requestURL);
+    console.log(
+      '[DEBUG] making request to',
+      JSON.stringify({
+        requestURL,
+        pokemonID,
+        body: event.body,
+        context,
+      })
+    );
     const response = await fetch(requestURL);
     const data = await response.json();
     const html = buildHtml(data);
