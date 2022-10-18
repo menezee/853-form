@@ -29,16 +29,12 @@ exports.handler = async (event, context) => {
     `;
     return {
       statusCode: 200,
-      headers: {
-        'Content-Type': 'text/html',
-      },
       body: html,
     };
   } catch (error) {
-    console.log(error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Failed fetching data' }),
+      body: JSON.stringify({ err: 'Failed fetching data', error }),
     };
   }
 };
