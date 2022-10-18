@@ -3,7 +3,7 @@ import fetch from 'node-fetch'
 
 const API_ENDPOINT = 'https://pokeapi.co/api/v2/pokemon/';
 
-function buildHtml(pokemon) {
+function buildHtml(pokemon, allParams) {
   return `
         <!DOCTYPE html>
         <html>
@@ -20,6 +20,12 @@ function buildHtml(pokemon) {
                 ${pokemon.abilities.map(data => (
                   `<li>${data.ability.name}</li>`
                 ))}
+              </ul>
+              <hr />
+              All params:
+              <br/>
+              <ul>
+                ${allParams.map(([k, v]) => `<li>${k} → ${v}</li>`).join('')}
               </ul>
             </main>
           </body>
@@ -43,7 +49,8 @@ exports.handler = async (event, context) => {
     );
     const response = await fetch(requestURL);
     const data = await response.json();
-    const html = buildHtml(data);
+    const allParams = Array.from(params.entries());
+    const html = buildHtml(data, allParams);
     console.log('[DEBUG] generated html', html);
     return {
       statusCode: 200,
