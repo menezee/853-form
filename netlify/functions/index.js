@@ -5,6 +5,7 @@ const API_ENDPOINT = 'https://pokeapi.co/api/v2/pokemon/1';
 
 exports.handler = async (event, context) => {
   try {
+    console.log('am i even here');
     const response = await fetch(API_ENDPOINT);
     const data = await response.json();
     return { statusCode: 200, body: JSON.stringify({ data: data.name }) };
