@@ -11,8 +11,14 @@
     action="https://peaceful-cocada-dda6d1.netlify.app/.netlify/functions/index"
     method="POST"
   >
-    <label for="pokemonID">Pokémon ID</label>
-    <input value="1" type="number" min="1" required name="pokemonID" id="pokemonID" />
+    <div>
+      <label for="pokemonID">Pokémon ID</label>
+      <input value="1" type="number" min="1" required name="pokemonID" id="pokemonID" />
+    </div>
+    <div>
+      <label for="date">Data</label>
+      <input type="date" min="2022-10-17" name="date" id="date" />
+    </div>
     <button type="submit">Enviar</button>
   </form>
 </body>
