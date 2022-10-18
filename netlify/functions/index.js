@@ -1,11 +1,17 @@
-const axios = require('axios').default;
+// const axios = require('axios').default;
+import fetch from 'node-fetch';
 
 const API_ENDPOINT = 'https://pokeapi.co/api/v2/pokemon/';
 
 exports.handler = async (event, context) => {
   try {
     const { pokemonID } = event.body;
-    const { data: pokemon } = await axios.get(`${API_ENDPOINT}${pokemonID}`);
+    const requestURL = `${API_ENDPOINT}${pokemonID}`;
+    console.log('[DEBUG]', JSON.stringify({ pokemonID, requestURL }));
+    // const { data: pokemon } = await axios.get(`${API_ENDPOINT}${pokemonID}`);
+    const res = await fetch(requestURL);
+    const pokemon = await res.json();
+    console.log('[DEBUG]', JSON.stringify({ pokemonName: pokemon.name }));
     const html = `
       <!DOCTYPE html>
       <html>
