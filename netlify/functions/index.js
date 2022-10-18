@@ -36,7 +36,7 @@ exports.handler = async (event, context) => {
       '[DEBUG] making request to',
       JSON.stringify({
         requestURL,
-        pokemonID,
+        pokemonID: params.get('pokemonID'),
         body: event.body,
         context,
       })
