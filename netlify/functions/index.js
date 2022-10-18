@@ -31,7 +31,7 @@ exports.handler = async (event, context) => {
   try {
     const body = event.body;
     const params = new URLSearchParams(body);
-    const requestURL = `${API_ENDPOINT}${params.get(pokemonID)}`;
+    const requestURL = `${API_ENDPOINT}${params.get('pokemonID')}`;
     console.log(
       '[DEBUG] making request to',
       JSON.stringify({
