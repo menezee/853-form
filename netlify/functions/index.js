@@ -19,7 +19,7 @@ function buildHtml(pokemon, allParams) {
               <ul>
                 ${pokemon.abilities.map(data => (
                   `<li>${data.ability.name}</li>`
-                ))}
+                )).join('')}
               </ul>
               <hr />
               All params:
